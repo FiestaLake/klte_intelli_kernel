@@ -609,9 +609,10 @@ static int __init cpu_ib_init(void)
 
 	fb_register_client(&fb_boost_nb);
 
-	b->ib.freq[0] = 1190400;
-	b->ib.freq[1] = 1497600;
+	b->ib.freq[0] = 1497600;
+	b->ib.freq[1] = 1728000;
 	b->ib.duration_ms = 50;
+        b->enabled = 1;
 
 	return 0;
 

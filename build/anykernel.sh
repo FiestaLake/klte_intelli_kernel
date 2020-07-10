@@ -1,13 +1,15 @@
-# AnyKernel2 Ramdisk Mod Script
+# AnyKernel3 Script
 #
 # Original and credits: osm0sis @ xda-developers
 #
-# Modified by sunilpaulmathew @ xda-developers.com
+# Modified by sunilpaulmathew @ xda-developers
+# Modified by pascua28 @ xda-developers
+# Modified by SmgKhOaRn @ xda-developers
 
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Intelli-kernel by pascua28 @ xda-developers
+kernel.string=Intelli-kernel by @pascua28, redesigned by @SmgKhOaRn
 do.devicecheck=1
 do.initd=0
 do.modules=0
@@ -71,6 +73,7 @@ else
 fi
 
 ASD=$(cat /system/build.prop | grep ro.build.version.sdk | cut -d "=" -f 2)
+ui_print "";
 
 if [ "$ASD" == "24" ] || [ "$ASD" == "25" ]; then
 	ui_print "Andoid 7.0/7.1 detected!";
@@ -83,6 +86,16 @@ if [ "$ASD" == "24" ] || [ "$ASD" == "25" ]; then
 else
 	ui_print "Android 8.0/8.1/9.0/10 detected!";
 fi
+
+# disable Mpdecision
+ui_print "";
+if [ -f /system/vendor/bin/mpdecision ]; then
+       ui_print "MPDecision Found! Disabling..."
+       mv /system/vendor/bin/mpdecision /system/vendor/bin/intelli.mpdecision;
+       ui_print "MPDecision has been disabled!";
+else
+       ui_print "MPDecision is disabled!!";
+fi;
 
 remove_line init.qcom.rc "exec u:r:magisk:s0 root root -- /sbin/intellikernel.sh"
 remove_line init.qcom.rc "exec u:r:supersu:s0 root root -- /sbin/intellikernel.sh"

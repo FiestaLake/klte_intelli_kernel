@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2013-2015, Francisco Franco <franciscofranco.1990@gmail.com>.
  * Copyright (c) 2019, The Lolz Kernel Project.
+ * Copyright (C) 2020, The Intelli Kernel Project.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -11,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * Simple no bullshit hotplug  driver for Galaxy Note 3(hlte)
+ * A simple hotplug driver for MSM8974 devices.
  */
 
 #include <linux/module.h>
@@ -31,12 +32,12 @@
 
 #define MAKO_HOTPLUG "mako_hotplug"
 
-#define DEFAULT_HOTPLUG_ENABLED 	0
+#define DEFAULT_HOTPLUG_ENABLED 	1
 #define DEFAULT_LOAD_THRESHOLD 		80
-#define DEFAULT_HIGH_LOAD_COUNTER 	50
+#define DEFAULT_HIGH_LOAD_COUNTER 	15
 #define DEFAULT_MAX_LOAD_COUNTER 	20
-#define DEFAULT_CPUFREQ_UNPLUG_LIMIT 	1728000
-#define DEFAULT_MIN_TIME_CPU_ONLINE 	1
+#define DEFAULT_CPUFREQ_UNPLUG_LIMIT 	2265600
+#define DEFAULT_MIN_TIME_CPU_ONLINE 	2
 #define DEFAULT_TIMER 			1
 
 #define MIN_CPU_UP_US (200 * USEC_PER_MSEC)
