@@ -1,7 +1,7 @@
 #!/bin/bash
 
-K_NAME="Intelli-Kernel"
-K_VERSION="v15"
+K_NAME="Smg-Intelli-Kernel"
+K_VERSION="210528-c"
 
 cp defconfig .config
 find arch/arm/boot/ -name "*.dtb" -type f -delete
@@ -184,11 +184,12 @@ esac
 
 DATE_START=$(date +"%s")
 
-export KBUILD_COMPILER_STRING=$(~/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+export PATH="$HOME/Workspace/toolchain/proton-clang/bin:$PATH"
+export KBUILD_COMPILER_STRING=$(clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
-make ARCH=arm CC="ccache /home/pascua14/clang/bin/clang" \
-CLANG_TRIPLE=arm-linux-gnueabihf- \
-CROSS_COMPILE=arm-linux-gnueabihf- \
+make ARCH=arm CC=clang \
+CLANG_TRIPLE=arm-linux-gnueabi- \
+CROSS_COMPILE=arm-linux-gnueabi- \
 -j$(nproc --all) 2>&1 | tee ../compile.log
 
 tools/dtbTool -2 -o arch/arm/boot/dtb -s 2048 -p scripts/dtc/ arch/arm/boot/
